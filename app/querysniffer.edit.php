@@ -7,7 +7,7 @@ error_reporting(E_ERROR);
 final class Starter
 {
 	const SHELL_TAB = "\t\t";
-	const USAGE = "\nUsage %s {%s}\n\n";
+	const USAGE = "Usage %s {%s}\n\n";
 
 	const PATH_TO_LOCK = "/var/lock/subsys";
 	const PATH_TO_PID = "/var/run";
