@@ -12,25 +12,25 @@ parameters:
 services:
     # Reader from file
     reader:
-        class:      Application\Reader\ReaderFile
+        class:      QuerySniffer\Reader\ReaderFile
         properties:
             seek:   true
 
     # MySQL log fetcher to queries
     fetcher:
-        class:      Application\Fetcher\QueryMySQLFetcher
+        class:      QuerySniffer\Fetcher\QueryMySQLFetcher
 
     # MySQL queries to output log formatter
     formatter:
-        class:      Application\Formatter\QueryMySQLFormatter
+        class:      QuerySniffer\Formatter\QueryMySQLFormatter
 
     # Writer to file
     writer:
-        class:      Application\Writer\WriterFile
+        class:      QuerySniffer\Writer\WriterFile
 
     # Patcher
-    patcher:
-        class:      Application\Patcher\PatcherMySQL
+    sniffer:
+        class:      QuerySniffer\Patcher\QuerySnifferMySQL
         properties:
             reader:     @reader
             fetcher:    @fetcher
@@ -44,6 +44,6 @@ services:
 
 
     daemon:
-        class:      Application\Daemon\DaemonSimple
+        class:      QuerySniffer\Daemon\DaemonSimple
         calls:
-                    - [ setPatcher, [ @patcher ] ]
+                    - [ setPatcher, [ @sniffer ] ]

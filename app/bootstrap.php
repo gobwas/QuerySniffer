@@ -1,6 +1,6 @@
 <?php
 use Symfony\Component\ClassLoader\UniversalClassLoader;
-use Application\Exception\AssertionException;
+use QuerySniffer\Exception\AssertionException;
 
 // Timezone
 date_default_timezone_set('Europe/Moscow');
@@ -30,5 +30,5 @@ require_once dirname(__DIR__)."/vendor/autoload.php";
 
 // Автозагрузка классов приложения
 $classLoader = new UniversalClassLoader();
-$classLoader->registerNamespace('Application', dirname(__DIR__).'/src/');
+$classLoader->registerNamespace('QuerySniffer', dirname(__DIR__).'/src/');
 $classLoader->register();

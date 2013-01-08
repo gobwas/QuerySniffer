@@ -19,6 +19,6 @@ $container = new ContainerBuilder();
 $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
 $loader->load('services.yml');
 
-/* @var $daemon \Application\Daemon\IDaemon */
+/* @var $daemon \QuerySniffer\Daemon\IDaemon */
 $daemon = $container->get('daemon');
 $daemon->run();
