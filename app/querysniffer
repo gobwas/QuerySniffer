@@ -30,7 +30,7 @@ final class Starter
 
 		$this->application = realpath(__DIR__.'/'.self::APPLICATION);
 
-		$this->command  = strtolower(substr(basename(__FILE__), 0, strpos(basename(__FILE__), '.')));
+		$this->command  = strtolower(basename(__FILE__));
 		$this->lockFile = self::PATH_TO_LOCK.'/'.$this->command;
 		$this->pidFile  = self::PATH_TO_PID.'/'.$this->command.'.pid';
 
