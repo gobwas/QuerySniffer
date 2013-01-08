@@ -1,0 +1,9 @@
+{
+    "require": {
+        "symfony/dependency-injection" : "dev-master",
+        "symfony/class-loader" : "dev-master",
+        "symfony/yaml": "dev-master",
+        "symfony/config": "dev-master",
+        "gobwas/shellstyle": "dev-master"
+    }
+}

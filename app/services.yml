@@ -1,0 +1,49 @@
+parameters:
+    reader.files:    [ /var/log/mysql/mysqld.log ]
+    writer.files:
+                    -
+                      file: output/output_alter.txt
+                      types: [ALTER]
+                    -
+                      file: output/output_use_select.txt
+                      types: [SELECT]
+    debug.file:     output/debug.info
+
+services:
+    # Reader from file
+    reader:
+        class:      Application\Reader\ReaderFile
+        properties:
+            seek:   true
+
+    # MySQL log fetcher to queries
+    fetcher:
+        class:      Application\Fetcher\QueryMySQLFetcher
+
+    # MySQL queries to output log formatter
+    formatter:
+        class:      Application\Formatter\QueryMySQLFormatter
+
+    # Writer to file
+    writer:
+        class:      Application\Writer\WriterFile
+
+    # Patcher
+    patcher:
+        class:      Application\Patcher\PatcherMySQL
+        properties:
+            reader:     @reader
+            fetcher:    @fetcher
+            formatter:  @formatter
+            writer:     @writer
+            debug:      %debug.file%
+        arguments:
+                    -
+                      inputs:  %reader.files%
+                      outputs:  %writer.files%
+
+
+    daemon:
+        class:      Application\Daemon\DaemonSimple
+        calls:
+                    - [ setPatcher, [ @patcher ] ]
