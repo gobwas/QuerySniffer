@@ -1,5 +1,7 @@
 <?php
 namespace QuerySniffer\Filesystem;
+
+use QuerySniffer\Filesystem\Exception\FilesystemException;
 use ReflectionObject;
 
 /**

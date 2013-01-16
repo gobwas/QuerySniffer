@@ -1,5 +1,6 @@
 <?php
 namespace QuerySniffer\Patcher;
+
 use QuerySniffer\Patcher\IQuerySniffer;
 use QuerySniffer\Formatter\QueryDumpFormatter;
 use QuerySniffer\Model\QueriesBag;

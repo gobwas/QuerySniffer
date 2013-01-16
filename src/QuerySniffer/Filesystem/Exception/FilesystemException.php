@@ -1,5 +1,5 @@
 <?php
-namespace QuerySniffer\Filesystem;
+namespace QuerySniffer\Filesystem\Exception;
 use QuerySniffer\Exception\ApplicationException;
 
 

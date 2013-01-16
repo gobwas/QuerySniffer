@@ -4,6 +4,8 @@
 require_once dirname(__DIR__)."/vendor/autoload.php";
 error_reporting(E_ERROR);
 
+use Symfony\Component\Process\Process;
+
 final class Starter
 {
 	const SHELL_TAB = "\t\t";
@@ -59,11 +61,18 @@ final class Starter
 			}
 
 			if (!is_file($this->lockFile)) {
-				if (!touch($this->lockFile)) {
-					throw new Exception("Could not create file {$this->lockFile}");
-				}
+				$process = new Process(sprintf('php %1$s "%2$s"', $this->application, $this->pidFile));
+				$process->run();
 
-				$pid = exec(sprintf('php %1$s "%2$s"', $this->application, $this->pidFile));
+				if ($process->isSuccessful()) {
+					$pid = $process->getOutput();
+					if (!touch($this->lockFile)) {
+						$this->kill($pid);
+						throw new Exception("Could not create file {$this->lockFile}");
+					}
+				} else {
+					throw new Exception("Application cant run successfully: ".$process->getErrorOutput());
+				}
 
 				if (!is_numeric(trim($pid))) {
 					throw new Exception("Application has returned invalid processId");
