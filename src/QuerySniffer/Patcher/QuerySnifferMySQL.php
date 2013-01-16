@@ -102,7 +102,7 @@ class QuerySnifferMySQL implements IQuerySniffer
 		}
 
 		$formatter = new QueryMySQLFormatter();
-
+// TODO Сделать разделение по базе и таблице
 		foreach ($this->outputs as $output) {
 			$filter = new FilterChain();
 			$filter
